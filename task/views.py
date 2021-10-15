@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-@login_required
+@login_required(login_url='account-login')
 def index(request):
     comp_tasks_count = Current.objects.filter(status='Completed').count()
     del_tasks_count = Current.objects.filter(status='Deleted').count()
@@ -29,7 +29,7 @@ def about(request):
     
     return render(request, 'task/dashboard/about.html')
 
-@login_required
+@login_required(login_url='account-login')
 def current(request):
     curr_tasks = Current.objects.filter(status='Current')
     curr_tasks_count = curr_tasks.count()
@@ -58,7 +58,7 @@ def current(request):
     return render(request, 'task/dashboard/current.html', context)
 
 
-# Current update and delete
+@login_required(login_url='account-login')
 def current_delete(request, pk):
     curr_del = Current.objects.get(id=pk)
     if request.method == "POST":
@@ -68,6 +68,7 @@ def current_delete(request, pk):
     return render(request, 'task/dashboard/current_delete.html')
 
 
+@login_required(login_url='account-login')
 def current_update(request, pk):
     curr_up = Current.objects.get(id=pk)
     if request.method == "POST":
@@ -83,7 +84,7 @@ def current_update(request, pk):
     return render(request, 'task/dashboard/current_update.html', context)
 
 
-# Completed update and delete
+@login_required(login_url='account-login')
 def completed_delete(request, pk):
     comp_del = Current.objects.get(id=pk)
     if request.method == "POST":
@@ -93,6 +94,7 @@ def completed_delete(request, pk):
     return render(request, 'task/dashboard/completed_delete.html')
 
 
+@login_required(login_url='account-login')
 def completed_update(request, pk):
     comp_up = Current.objects.get(id=pk)
     if request.method == "POST":
@@ -108,8 +110,7 @@ def completed_update(request, pk):
     return render(request, 'task/dashboard/completed_update.html', context)
 
 
-
-@login_required
+@login_required(login_url='account-login')
 def completed(request):
     comp_tasks = Current.objects.filter(status='Completed')
     comp_tasks_count = comp_tasks.count()
@@ -128,7 +129,7 @@ def completed(request):
     return render(request, 'task/dashboard/completed.html', context)
 
 
-@login_required
+@login_required(login_url='account-login')
 def deleted(request):
     del_tasks = Current.objects.filter(status='Deleted')
     del_tasks_count = del_tasks.count()
@@ -145,6 +146,7 @@ def deleted(request):
     return render(request, 'task/dashboard/deleted.html', context)
 
 
+@login_required(login_url='account-login')
 def export_excel(request, id):
     if id == 1: # current
         obj = Current
@@ -183,4 +185,3 @@ def export_excel(request, id):
         
     wb.save(response)
     return response
-    

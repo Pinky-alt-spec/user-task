@@ -7,11 +7,11 @@
 
 - Clone it from github code
 
-```git clone https://github.com/erinallard/instagram_miner.git ```
+```git clone https://github.com/Pinky-alt-spec/user-task ```
 
 ---
 
-- Create and start a a virtual environment
+- Create and start a virtual environment
 
 ```virtualenv env --no-site-packages```
 

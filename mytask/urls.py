@@ -21,6 +21,7 @@ from django.urls import path, include
 
 from accounts import views as accounts_view
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from task import views
 
 app_name = 'task'
@@ -37,10 +38,10 @@ urlpatterns = [
 
     path('export_excel/<int:id>/', views.export_excel, name='export_excel'),
 
-    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='task/accounts/password_reset_form.html'), name='password-reset'),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='task/accounts/password_reset_done.html'), name='password-reset-done'),
-    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='task/accounts/password_reset_confirm.html'), name='password-reset-confirm'),
-    path('password_change/', auth_views.PasswordChangeView.as_view(template_name='task/accounts/password_change.html'), name='password-change'),
+    path('password_reset/', PasswordResetView.as_view(template_name='task/accounts/password_reset_form.html'), name='password-reset'),
+    path('password_reset_done/', PasswordResetDoneView.as_view(template_name='task/accounts/password_reset_done.html'), name='password-reset-done'),
+    path('password_reset_confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='task/accounts/password_reset_confirm.html'), name='password-reset-confirm'),
+    path('password_complete/', PasswordResetCompleteView.as_view(template_name='task/accounts/password_reset_email.html'), name='password-change'),
    
  ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
