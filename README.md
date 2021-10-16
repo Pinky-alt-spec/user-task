@@ -1,9 +1,8 @@
 # user-task project
-<<<<<<< HEAD
-https://3af5-202-182-124-193.ngrok.io/ 
-=======
-https://3af5-202-182-124-193.ngrok.io/
->>>>>>> 6041d9f0c7b1d89b59b3978f2c2246dc4c86a739
+
+### https://3af5-202-182-124-193.ngrok.io/ 
+
+---
 
 ## Project Stack 
 - Python/Django
