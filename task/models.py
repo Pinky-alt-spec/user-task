@@ -1,6 +1,16 @@
+from django.utils.timezone import make_aware
+from django.conf import settings
+from datetime import tzinfo
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+
+from datetime import datetime, timezone
+
+now = datetime.now() 
+settings.TIME_ZONE
+aware_datetime = make_aware(now)
+
 
 # Create your models here.
 
@@ -13,7 +23,7 @@ STATUS = (
 class Current(models.Model):
     task = models.CharField(max_length=100, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    date = models.DateTimeField(default=now, editable=False)
+    date = models.DateTimeField(default=aware_datetime, null=True)
     status = models.CharField(max_length=20, choices=STATUS, null=True)
 
 
@@ -26,7 +36,7 @@ class Current(models.Model):
 
 class Completed(models.Model):
     task = models.ForeignKey(Current, on_delete=models.CASCADE, null=True)
-    date = models.DateTimeField(default=now, editable=False)
+    date = models.DateTimeField(default=aware_datetime, null=True)
     status = models.CharField(max_length=20, choices=STATUS, null=True)
 
 
@@ -39,7 +49,7 @@ class Completed(models.Model):
 
 class Deleted(models.Model):
     task = models.ForeignKey(Current, on_delete=models.CASCADE, null=True)
-    date = models.DateTimeField(default=now, editable=False)
+    date = models.DateTimeField(default=aware_datetime, null=True)
     status = models.CharField(max_length=20, choices=STATUS, null=True)
 
     class Meta:

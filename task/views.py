@@ -9,8 +9,6 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from datetime import datetime, timezone
 
-now = datetime.now(timezone.utc)
-
 
 # Create your views here.
 
@@ -180,10 +178,10 @@ def export_excel(request, id):
 
     curr_tasks = Current.objects.filter(status=f'{obj_name}').values_list('task', 'user', 'date', 'status')
     
-    # for row in curr_tasks:
-    #     row_num += 1
-    #     for col_num in range(len(row)):
-    #         ws.write(row_num, col_num, row[col_num])
+    for row in curr_tasks:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num])
         
     wb.save(response)
     return response
